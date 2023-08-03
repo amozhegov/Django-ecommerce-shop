@@ -1,10 +1,28 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-    <h3>Store</h3>
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="{% static 'images/laptop.jpeg' %}" alt="">
+            <div class="box-element product">
+                <h6><strong>Laptop</strong></h6>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="{% static 'images/mouse.jpeg' %}" alt="">
+            <div class="box-element product">
+                <h6><strong>Mouse</strong></h6>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="{% static 'images/desktop.png' %}" alt="">
+            <div class="box-element product">
+                <h6><strong>Desktop</strong></h6>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
+<!--
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-
-
 <img src="{% static 'images/cart.png' %}" alt="">
+-->
