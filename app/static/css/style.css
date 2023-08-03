@@ -26,6 +26,12 @@ h1, h2, h3, h4, h5 {
     background-color: darkgray!important;
 }
 
+.cart-item {
+    width: 20px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
 #cart-icon {
     width: 30px;
     display: inline-block;
