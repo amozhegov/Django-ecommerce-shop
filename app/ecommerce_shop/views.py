@@ -7,7 +7,15 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 def cart(request):
-    context = {}
+    # If the User is logged-in
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    # If the User is not logged-in
+    else:
+        items = []
+    context = {'items': items}
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
