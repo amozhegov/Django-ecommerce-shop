@@ -9,8 +9,8 @@
             <br>
             <table class="table">
                 <tr>
-                    <th><h4>Your Items: <strong>4</strong></h4></th>
-                    <th><h4>Total:<strong>&#x20AC;4,-</strong></h4></th>
+                    <th><h4>Your Items: <strong>{{order.get_cart_items}}</strong></h4></th>
+                    <th><h4>Total:<strong>&#x20AC;{{order.get_cart_total|floatformat:2}}</strong></h4></th>
                     <th>
                         <a class="btn btn-success" style="float:right; margin:5px" href="{% url 'checkout' %}">
                             Checkout
@@ -29,17 +29,17 @@
 
                 {% for item in items %}
                 <div class="cart-row">
-                    <div style="flex:2"><img class="row-image" src="{% static 'images/headphones.png'%}"></div>
-                    <div style="flex:2">Headphones</div>
-                    <div style="flex:1">&#x20AC;39,-</div>
+                    <div style="flex:2"><img class="row-image" src="{{ item.product.imageURL}}"></div>
+                    <div style="flex:2">{{item.product.name}}</div>
+                    <div style="flex:1">&#x20AC;{{item.product.price|floatformat:2}}</div>
                     <div style="flex:1">
-                        <p class="quantity">1</p>
+                        <p class="quantity">{{item.quantity}}</p>
                         <div class="quantity">
                             &#x2b;
                             &#x2212;
                         </div>
                     </div>
-                    <div style="flex:1">&#x20AC;39,-</div>
+                    <div style="flex:1">{{item.get_total}}</div>
                 </div>
                 {% endfor %}
             </div>
