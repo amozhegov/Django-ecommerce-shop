@@ -43,6 +43,7 @@
                 <small>Payment Options</small>
             </div>
         </div>
+        
         <div class="col-lg-6">
             <div class="box-element">
                 <a class="btn btn-outline-dark" href="{% url 'cart' %}">
@@ -51,14 +52,16 @@
                 <hr>
                 <h4>Your Order:</h4>
                 <hr>
+                {% for item in items %}  
                 <div class="cart-row">
-                    <div style="flex: 2"><img class="checkout-image" src="{% static 'images/desktop.jpeg' %}"></div>
-                    <div style="flex: 2"><p>Desktop</p></div>
-                    <div style="flex: 1"><p>&#x20AC;3999,-</p></div>
-                    <div style="flex: 1"><p>x1</p></div>
+                    <div style="flex: 2"><img class="checkout-image" src="{{ item.product.imageURL }}"></div>
+                    <div style="flex: 2"><p>{{ item.product.name }}</p></div>
+                    <div style="flex: 1"><p> &#x20AC; {{ item.product.price }}</p></div>
+                    <div style="flex: 1"><p> {{ item.quantity }}</p></div>
                 </div>
-                <h5>Products: 1</h5>
-                <h4>Total: &#x20AC;3999,-</h4>
+                {% endfor %}
+                <h5>{{ order.get_cart_items }}</h5>
+                <h4>Total: &#x20AC;{{ item.get_cart_total|floatformat:2 }}</h4>
             </div>
         </div>
     </div>
