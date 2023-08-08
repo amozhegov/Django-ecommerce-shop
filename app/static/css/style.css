@@ -18,6 +18,12 @@ h1, h2, h3, h4, h5 {
     height: 200px;
 }
 
+.navbar-brand {
+    font-family: 'Anton', sans-serif;
+    font-style: oblique;
+    font-size: 45px;
+}
+
 .product {
     border-radius: 0 0 5px 5px;
 }

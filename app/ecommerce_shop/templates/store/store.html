@@ -9,7 +9,7 @@
                 <h5><strong>{{product.name}}</strong></h5>
                 <hr>
                 <p>Description</p>
-                <button class="btn btn-outline-secondary add-btn">
+                <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">
                     Add to Cart
                     <img class="cart-item" src="{% static 'images/cart.png' %}" alt="">
                 </button>
