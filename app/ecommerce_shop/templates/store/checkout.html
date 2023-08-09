@@ -65,5 +65,24 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+    <script type="text/javascript">
+        var shipping = '{{order.shipping}}'
 
+        // Remove shipping-info form field if the item is digital
+        if (shipping == 'False') {
+            document.getElementById('shipping-info').innerHTML = ''
+        }
+
+        // Event handler to reveal the payment form field when
+        // form is completed button Comtinue is pressed
+        var form = document.getElementById('form')
+        form.addEventListener('submit', function(e) {
+            e.preventDefault()
+            console.log('Form is completed')
+            document.getElementById('form-button').classList.add('hidden');
+            document.getElementById('payment-info').classList.remove('hidden');
+
+        })
+    </script>
+{% endblock content %}
+ 
