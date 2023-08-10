@@ -4,6 +4,7 @@ E-commerece Website with payment integration and registration
 To do:
 1. Dark/Light mode
 2. Languages
+3. Make Item Description editable from admin
 
 
 Sources:
