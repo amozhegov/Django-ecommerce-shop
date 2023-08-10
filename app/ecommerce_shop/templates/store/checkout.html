@@ -68,10 +68,23 @@
     </div>
     <script type="text/javascript">
         var shipping = '{{order.shipping}}'
+        var total = '{{order.get_cart_total|floatformat:2}}'
 
         // Remove shipping-info form field if the item is digital
         if (shipping == 'False') {
             document.getElementById('shipping-info').innerHTML = ''
+        }
+
+        // If user is authorised, hide the shipping form field
+        if (user != 'AnonymousUser') {
+            document.getElementById('user-info').innerHTML = ''
+        }
+
+        // If user is logged in and his order is digital, 
+        // hide the shipping form field
+        if (shipping == 'False' && user != 'AnonymousUser') {
+            document.getElementById('form-wrapper').classList.add('hidden');
+            document.getElementById('payment-info').classList.remove('hidden');
         }
 
         // Event handler to reveal the payment form field when
@@ -85,11 +98,53 @@
 
         })
 
-        function submitformData() {
+        function submitFormData() {
             console.log('The Button "Pay" was clicked')
+            
+            var userFormData = {
+                'name':null,
+                'email':null,
+                'total':total,
+            }
+
+            var shippingInfo = {
+                'address':null,
+                'city':null,
+                'state':null,
+                'zipcode':null,
+            }
+
+            if (shipping != 'False') {
+                shippingInfo.address = form.address.value
+                shippingInfo.city = form.city.value
+                shippingInfo.state = form.state.value
+                shippingInfo.zipcode = form.zipcode.value
+            }
+
+            if (user != 'AnonymousUser') {
+                userFormData.name = form.name.value
+                userFormData.email = form.email.value
+            }
+
+            var url = '/process_order/'
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body:JSON.stringify({'form':userFormData,
+            'shipping':shippingInfo})
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success: ', data);
+                alert('Transaction has been completed')
+                window.location.href = '{% url "store" %}'
+            })
         }
         document.getElementById('make-payment').addEventListener('click', function(e) {
-            submitformData()
+            submitFormData()
         })
     </script>
 {% endblock content %}
