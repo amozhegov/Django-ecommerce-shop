@@ -5,6 +5,7 @@
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
                 <form id="form">
+                    {% csrf_token %}
                     <div id="user-info">
                         <div class="form-field">
                             <input type="text" name="name" placeholder="Name..." required class="form-control">
@@ -90,6 +91,8 @@
         // Event handler to reveal the payment form field when
         // form is completed button Comtinue is pressed
         var form = document.getElementById('form')
+        csrftoken = form.getElementsByTagName('input')[0].value
+        console.log('Newtoken:', csrftoken)
         form.addEventListener('submit', function(e) {
             e.preventDefault()
             console.log('Form is completed')
